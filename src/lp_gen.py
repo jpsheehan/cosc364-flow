@@ -1,7 +1,14 @@
+
+import inspect
 from lp_utils import perms, concat
 
-template = """\
+# Change these variables to alter the behaviour of the LP file generator
+PATH_SPLIT = 2
+DEMAND_FLOW = lambda i, j: 2 * i + j
+
+TEMPLATE = """\
 \\ COSC-364 Assignment 2, LP Output File
+\\ Parameters: X={}, Y={}, Z={}, Split={}, Demand={}
 
 MINIMIZE
 \tr
@@ -54,7 +61,7 @@ def get_nodes(x, y, z):
 
 def get_demand_constraints(s, t, d):
     """ Returns a list of demand constraints. """
-    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(2 * i + j)
+    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(DEMAND_FLOW(i, j))
             for (i, j) in perms([s, d])]
 
 
@@ -90,7 +97,7 @@ def get_binary_and_decision_variable_constraints(s, t, d):
 
 def get_binary_constraints(s, t, d):
     """ Returns a list of binary variable constraints. """
-    return [' + '.join(["U_{0}{1}{2}".format(i, k, j) for k in t]) + ' = 2'
+    return [' + '.join(["U_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {}'.format(PATH_SPLIT)
             for (i, j) in perms([s, d])]
 
 
@@ -103,6 +110,9 @@ def get_non_negativity_constraints(s, t, d):
     """ Returns a list of non-negativity constraints. """
     return ["X_{0} >= 0".format(subscript) for subscript in concat(perms([s, t, d]))]
 
+def get_function_source(fn):
+    src = inspect.getsource(fn)
+    return src[str(src).index(':')+2:]
 
 def generate_lp_file(x, y, z):
     """ Returns the LP file contents as per the project specification. """
@@ -122,7 +132,12 @@ def generate_lp_file(x, y, z):
     binary_variable_constraints = '\n\t'.join(get_binary_constraints(s, t, d))
     binary_variables = '\n\t'.join(get_binary_variables(s, t, d))
 
-    return template.format(
+    return TEMPLATE.format(
+        x,
+        y,
+        z,
+        PATH_SPLIT,
+        get_function_source(DEMAND_FLOW),
         demand_constraints,
         source_transit_capacity_constraints,
         transit_destination_capacity_constraints,
