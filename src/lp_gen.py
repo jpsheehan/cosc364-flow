@@ -6,18 +6,22 @@ MINIMIZE
     r
 SUBJECT TO
     \\ DEMAND CONSTRAINTS
-    {0}
-    \\ CAPACITY CONSTRAINTS
-    {1}
-    \\ BINARY VARIABLE CONSTRAINTS
-    {2}
+    {}
+    \\ CAPACITY CONSTRAINTS FOR LINKS BETWEEN SOURCE AND TRANSIT NODES
+    {}
+    \\ CAPACITY CONSTRAINTS FOR LINKS BETWEEN TRANSIT AND DESTINATION NODES
+    {}
+    \\ TRANSIT NODE LOAD CONSTRAINTS
+    {}
+    \\ BINARY VARIABLE CONSTRAINTS (ONLY 2 ACTIVE TRANSIT NODES)
+    {}
 BOUNDS
     \\ NON-NEGATIVITY CONSTRAINTS
     r > 0
-    {3}
+    {}
 BIN
     \\ BINARY VARIABLES
-    {4}
+    {}
 END
 """
 
@@ -36,16 +40,27 @@ def get_demand_constraints(s, t, d):
             for (i, j) in perms([s, d])]
 
 
-def get_capacity_constraints(s, t, d):
-    """ Returns a list of capacity constraints. """
+def get_source_transit_capacity_constraints(s, t, d):
+    """ Returns a list of capacity constraints for the links between the source and transit nodes. """
     return \
         [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) +
-            ' - C_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])] + \
-        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) +
-            ' - D_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]  # + \
+            ' - C_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])]  # + \
     # [' + '.join(["C_{0}{1}".format(i, j) for i in s]) +
     # ' - r <= 0' for j in d]
     # don't know about the above commented lines
+
+
+def get_transit_destination_capacity_constraints(s, t, d):
+    """ Returns a list of capacity constraints for the links between the transit and destination nodes. """
+    return \
+        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) +
+            ' - D_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]
+
+
+def get_transit_load_constraints(s, t, d):
+    """ Returns the list of transit load constraints. """
+    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for (i, j) in perms([s, d])]) +
+            ' - L_{0} = 0'.format(k) for k in t]
 
 
 def get_binary_constraints(s, t, d):
@@ -69,15 +84,22 @@ def generate_lp_file(x, y, z):
     s, t, d = get_nodes(x, y, z)
 
     demand_constraints = '\n\t'.join(get_demand_constraints(s, t, d))
-    capacity_constraints = '\n\t'.join(get_capacity_constraints(s, t, d))
+    source_transit_capacity_constraints = '\n\t'.join(
+        get_source_transit_capacity_constraints(s, t, d))
+    transit_destination_capacity_constraints = '\n\t'.join(
+        get_transit_destination_capacity_constraints(s, t, d))
     non_negativity_constraints = '\n\t'.join(get_non_negativity_constraints(
         s, t, d))
+    transit_load_constraints = '\n\t'.join(
+        get_transit_load_constraints(s, t, d))
     binary_variable_constraints = '\n\t'.join(get_binary_constraints(s, t, d))
     binary_variables = '\n\t'.join(get_binary_variables(s, t, d))
 
     return template.format(
         demand_constraints,
-        capacity_constraints,
+        source_transit_capacity_constraints,
+        transit_destination_capacity_constraints,
+        transit_load_constraints,
         binary_variable_constraints,
         non_negativity_constraints,
         binary_variables)
