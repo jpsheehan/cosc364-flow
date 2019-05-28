@@ -157,8 +157,9 @@
 \sum_{j = 1}^{Z} x_{ikj} &= c_{ik} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\[1em]
 \sum_{i = 1}^{X} x_{ikj} &= d_{kj} & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
 \sum_{k = 1}^{Y} x_{ikj} &= l_k & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
-\sum_{k = 1}^{Y} u_{ikj} &= 2 & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
-% \sum_{k = 1}^{Y} x_{ikj} &\leq r & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+\sum_{k = 1}^{Y} u_{ikj} &= 2 & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+u_{ikj} &\in \{0, 1\} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\sum_{i = 1}^{X} c_{ij} &\leq r & j \in \{1, \ldots, Z\}
 \end{align}
 
 \subsection{Non-Negativity Constraints}

@@ -84,9 +84,8 @@ def get_transit_load_constraints(s, t, d):
 
 def get_objective_function_load_constraints(s, t, d):
     """ Returns the list of objective function load constraints. """
-    return []
-    #return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for (i, j) in perms([s, d])]) +
-    #        ' - r <= 0' for k in t]
+    return [' + '.join(["c_{0}{1}".format(i, j) for i in s]) +
+            ' - r <= 0' for j in d]
 
 def get_binary_and_decision_variable_constraints(s, t, d):
     """ Returns the binary and decision variable constraints. """
