@@ -118,7 +118,56 @@
 
 \section{Problem Formulation}
 
+% The network is defined as having $X$ source nodes ($S_1,\ S_2,\ \ldots,\ S_X$), $Y$ transit nodes ($T_1,\ T_2,\ \ldots,\ T_Y$) and $Z$ destination nodes ($D_1,\ D_2,\ \ldots,\ D_Z$). All transit nodes are directly connected to all source and destination nodes. Source and destination nodes are only connected directly to transit nodes. In this way, all source nodes are connected to all destination nodes via all transit nodes.
+% The demand flow between source $i$ and destination $j$ is $h_{ij} = 2i + j$. Additionally, the load from source $i$ to destination $j$ must go through exactly two transit nodes. \\
+
+% As this is a load balancing problem, we are looking to minimize the object function $r$. Where $r$ is the... (IS THIS CORRECT? EXPLAIN) \\
+
+\noindent \textbf{Notation:}
+\begin{itemize}
+\item $X$ is the number of source nodes.
+\item $Y$ is the number of transit nodes.
+\item $Z$ is the number of destination nodes.
+\item $S_i$ is the $i$th source node.
+\item $T_k$ is the $k$th transit node.
+\item $D_j$ is the $j$th destination node.
+\item $c_{ik}$ is the link capacity between $S_i$ and $T_k$.
+\item $d_{kj}$ is the link capacity between $T_k$ and $D_j$.
+\item $x_{ikj}$ is the decision variable associated with the...
+\item $u_{ikj}$ is the binary decision variable assodicated with the...
+\end{itemize}
+
+\subsection{Objective Function}
+
+\begin{align}
+\text{minimize}_{[r]}
+\end{align}
+
+\subsection{Demand Constraints}
+
+\begin{align}
+\sum_{k = 1}^{Y} x_{ikj} &= 2i + j & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
+\end{align}
+
+\subsection{Capacity Constraints}
+
+\begin{align}
+\sum_{j = 1}^{Z} x_{ikj} &\leq c_{ik} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\
+\sum_{i = 1}^{X} x_{ikj} &\leq d_{kj} & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\
+\sum_{k = 1}^{Y} x_{ikj} &\leq r & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\
+\sum_{k = 1}^{Y} u_{ikj} &= 2 & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
+\end{align}
+
+\subsection{Non-Negativity Constraints}
+
+\begin{align}
+r &\geq 0 \\
+x_{ijk} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
+\end{align}
+
 % Discuss the different types of constraints and how we define them mathematically
+
+% Demand Constraints
 
 \section{Results}
 
