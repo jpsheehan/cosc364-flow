@@ -1,6 +1,4 @@
-
-import inspect
-from lp_utils import perms, concat
+from lp_utils import perms, concat, get_lines, get_function_source
 
 # Change these variables to alter the behaviour of the LP file generator
 PATH_SPLIT = 2
@@ -110,27 +108,23 @@ def get_non_negativity_constraints(s, t, d):
     """ Returns a list of non-negativity constraints. """
     return ["X_{0} >= 0".format(subscript) for subscript in concat(perms([s, t, d]))]
 
-def get_function_source(fn):
-    src = inspect.getsource(fn)
-    return src[str(src).index(':')+2:]
-
 def generate_lp_file(x, y, z):
     """ Returns the LP file contents as per the project specification. """
     s, t, d = get_nodes(x, y, z)
 
-    demand_constraints = '\n\t'.join(get_demand_constraints(s, t, d))
-    source_transit_capacity_constraints = '\n\t'.join(
+    demand_constraints = get_lines(get_demand_constraints(s, t, d))
+    source_transit_capacity_constraints = get_lines(
         get_source_transit_capacity_constraints(s, t, d))
-    transit_destination_capacity_constraints = '\n\t'.join(
+    transit_destination_capacity_constraints = get_lines(
         get_transit_destination_capacity_constraints(s, t, d))
-    non_negativity_constraints = '\n\t'.join(get_non_negativity_constraints(
+    non_negativity_constraints = get_lines(get_non_negativity_constraints(
         s, t, d))
-    objective_function_load_constraints = '\n\t'.join(get_objective_function_load_constraints(s, t, d))
-    transit_load_constraints = '\n\t'.join(
+    objective_function_load_constraints = get_lines(get_objective_function_load_constraints(s, t, d))
+    transit_load_constraints = get_lines(
         get_transit_load_constraints(s, t, d))
-    binary_and_decision_constraints = '\n\t'.join(get_binary_and_decision_variable_constraints(s, t, d))
-    binary_variable_constraints = '\n\t'.join(get_binary_constraints(s, t, d))
-    binary_variables = '\n\t'.join(get_binary_variables(s, t, d))
+    binary_and_decision_constraints = get_lines(get_binary_and_decision_variable_constraints(s, t, d))
+    binary_variable_constraints = get_lines(get_binary_constraints(s, t, d))
+    binary_variables = get_lines(get_binary_variables(s, t, d))
 
     return TEMPLATE.format(
         x,

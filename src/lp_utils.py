@@ -1,5 +1,6 @@
 import functools
 import subprocess
+import inspect
 
 
 def get_lp_filename(x, y, z):
@@ -10,7 +11,7 @@ def get_lp_filename(x, y, z):
 def run_cplex(filename):
     """ Runs cplex on the LP file. """
     subprocess.run(
-        'cplex -c "read {0}" "optimize" "display solution variables -"'.format(filename))
+        ['cplex', '-c', '"read {0}"'.format(filename), '"optimize"', '"display solution variables -"'])
 
 
 def crange(first, last):
@@ -68,6 +69,13 @@ def concat(permutations):
     ['ax', 'ay', 'az', 'bx', 'by', 'bz', 'cx', 'cy', 'cz']
     """
     return [functools.reduce(lambda x, y: x + str(y), p, '') for p in permutations]
+
+def get_function_source(fn):
+    src = inspect.getsource(fn)
+    return src[str(src).index(':')+2:]
+
+def get_lines(strings):
+    return '\n\t'.join(strings)
 
 
 if __name__ == "__main__":
