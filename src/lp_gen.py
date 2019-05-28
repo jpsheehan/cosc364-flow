@@ -17,7 +17,7 @@ SUBJECT TO
     {}
 BOUNDS
     \\ NON-NEGATIVITY CONSTRAINTS
-    r > 0
+    r >= 0
     {}
 BIN
     \\ BINARY VARIABLES
@@ -44,7 +44,7 @@ def get_source_transit_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints for the links between the source and transit nodes. """
     return \
         [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) +
-            ' - C_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])]  # + \
+            ' - C_{0}{1} <= 0'.format(i, k) for (i, k) in perms([s, t])]  # + \
     # [' + '.join(["C_{0}{1}".format(i, j) for i in s]) +
     # ' - r <= 0' for j in d]
     # don't know about the above commented lines
@@ -54,13 +54,14 @@ def get_transit_destination_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints for the links between the transit and destination nodes. """
     return \
         [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) +
-            ' - D_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]
+            ' - D_{0}{1} <= 0'.format(k, j) for (k, j) in perms([t, d])]
 
 
 def get_transit_load_constraints(s, t, d):
     """ Returns the list of transit load constraints. """
     return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for (i, j) in perms([s, d])]) +
-            ' - L_{0} = 0'.format(k) for k in t]
+            ' - r <= 0' for k in t]  # maybe change this line for the one below?
+    # ' - L_{0} <= 0'.format(k) for k in t]
 
 
 def get_binary_constraints(s, t, d):
