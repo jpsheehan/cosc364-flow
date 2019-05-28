@@ -2,3 +2,6 @@
 __pycache__/
 /*.lp
 /cplex.log
+/report/report.*
+!/report/report.pdf
+!/report/report.tex

@@ -1,0 +1,156 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+
+% This is a simple template for a LaTeX document using the "article" class.
+% See "book", "report", "letter" for other types of document.
+
+\documentclass[12pt]{article} % use larger type; default would be 10pt
+
+\usepackage[utf8]{inputenc} % set input encoding (not needed with XeLaTeX)
+
+%%% Examples of Article customizations
+% These packages are optional, depending whether you want the features they provide.
+% See the LaTeX Companion or other references for full information.
+
+%%% PAGE DIMENSIONS
+\usepackage{geometry} % to change the page dimensions
+\geometry{a4paper} % or letterpaper (US) or a5paper or....
+\geometry{margin=1in} % for example, change the margins to 2 inches all round
+% \geometry{landscape} % set up the page for landscape
+%   read geometry.pdf for detailed page layout information
+
+\usepackage{graphicx} % support the \includegraphics command and options
+
+%%% PACKAGES
+\usepackage{booktabs} % for much better looking tables
+\usepackage{array} % for better arrays (eg matrices) in maths
+\usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
+\usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
+%\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
+\usepackage{pdfpages}
+\usepackage{amsmath,mathtools,amsfonts}
+\usepackage{bm}
+\usepackage{blindtext}
+\usepackage{fancyhdr}
+\usepackage{float}
+\usepackage{gensymb}
+\usepackage{svg}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{color}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ 
+	backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}; should come as last argument
+	basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+	breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+	breaklines=true,                 % sets automatic line breaking
+	captionpos=b,                    % sets the caption-position to bottom
+	commentstyle=\color{mygreen},    % comment style
+	deletekeywords={...},            % if you want to delete keywords from the given language
+	escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+	extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+	firstnumber=001,                % start line enumeration with line 1000
+	frame=single,	                   % adds a frame around the code
+	keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+	keywordstyle=\color{blue},       % keyword style
+	language=Octave,                 % the language of the code
+	morekeywords={*,...},            % if you want to add more keywords to the set
+	numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+	numbersep=5pt,                   % how far the line-numbers are from the code
+	numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+	rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+	showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+	showstringspaces=false,          % underline spaces within strings only
+	showtabs=false,                  % show tabs within strings adding particular underscores
+	stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+	stringstyle=\color{mymauve},     % string literal style
+	tabsize=2,	                   % sets default tabsize to 2 spaces
+	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+\graphicspath{ {./images/} }
+
+%%% HEADERS & FOOTERS
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{1pt} % customise the layout...
+\renewcommand{\footrulewidth}{1pt} % customise the layout...
+\fancyhf{}
+
+% HEADER
+\fancyhead[L]{COSC-364}
+\fancyhead[C]{}
+\fancyhead[R]{Assignment 2}
+
+% FOOTER
+\fancyfoot[L]{}
+\fancyfoot[C]{\thepage}
+\fancyfoot[R]{}
+
+%% TITLE
+\title{\uppercase{
+	COSC-364 Flow Planning Assignment
+}}
+\date{\today}
+\author{
+	Will Cowper\\
+	{\small{ID: 81163265}}\\
+	{\small{wgc22@uclive.ac.nz}}\\
+	{\small{Contribution: 50\%}}\\
+	\\
+	Jesse Sheehan\\
+	{\small{ID: 53366509}}\\
+	{\small{jps111@uclive.ac.nz}}\\
+	{\small{Contribution: 50\%}}\\
+	\\
+}
+
+%\renewcommand{\sectionmark}[1]{\markright{\thesection\ #1}}
+
+\begin{document}
+
+\maketitle
+
+\newpage
+
+\section{Problem Formulation}
+
+% Discuss the different types of constraints and how we define them mathematically
+
+\section{Results}
+
+% Show results for the CPLEX execution time, the number of links with non-zero capacities, the spread of the transit node loads (the difference between the largest and the smallest transit node load), and the highest capacity links, for all varying Y.
+% Show these results as a graph or a table.
+% Please explain the results
+
+\section{Appendix}
+
+
+\subsection{Source Code}
+
+\subsubsection{src/\_\_main\_\_.py}
+\lstinputlisting[language=Python]{../src/__main__.py}
+
+\subsubsection{src/lp\_utils.py}
+\lstinputlisting[language=Python]{../src/lp_utils.py}
+
+\subsubsection{src/lp\_gen.py}
+\lstinputlisting[language=Python]{../src/lp_gen.py}
+
+% Add any other source files we've used
+
+\subsection{Generated LP File}
+
+\subsubsection{problem\_3\_2\_4.lp}
+% \lstinputlisting[language=Python]{../src/__main__.py}
+
+% Ask Andreas about this one! The parameters of this file directly contradict the spec!
+
+\subsection{Plagiarism Declaration}
+
+% insert the signed plagiarism declaration (possible as an include pdf command just after the title page
+
+\end{document}
