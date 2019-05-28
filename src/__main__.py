@@ -30,8 +30,8 @@ def get_problem_parameters():
         print("Error: x must be strictly positive")
         exit(-1)
 
-    if y < 3:
-        print("Error: y must be greater than or equal to 3")
+    if y < 0:
+        print("Error: y must be strictly positive")
         exit(-1)
 
     if z <= 0:
