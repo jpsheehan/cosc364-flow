@@ -4,7 +4,7 @@ from lp_gen import generate_lp_file
 from lp_utils import get_lp_filename, run_cplex
 
 __TITLE__ = "COSC-364 Assignment 2"
-__AUTHORS__ = [("Will Cowper", ""), ("Jesse Sheehan", "53366509")]
+__AUTHORS__ = [("Will Cowper", "81163265"), ("Jesse Sheehan", "53366509")]
 
 
 def print_version():
