@@ -14,7 +14,7 @@ BOUNDS
     {2}
 BIN
     \\ BINARY VARIABLES
-    {3}
+    {3};
 END
 """
 
@@ -35,12 +35,14 @@ def get_demand_constraints(s, t, d):
 
 def get_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints. """
-    return []
+    # not sure about this
+    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) + ' - r <= 0' for (i, k) in perms([s, t])] + [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) + ' - r <= 0' for (k, j) in perms([t, d])]
 
 
 def get_binary_variables(s, t, d):
     """ Returns a list of binary variables. """
-    return []
+    # not sure about this
+    return ["U_{0}{1}".format(i, j) for (i, j) in perms([s, d])]
 
 
 def get_non_negativity_constraints(s, t, d):
@@ -56,5 +58,5 @@ def generate_lp_file(x, y, z):
     capacity_constraints = '\n\t'.join(get_capacity_constraints(s, t, d))
     non_negativity_constraints = '\n\t'.join(get_non_negativity_constraints(
         s, t, d))
-    binary_variables = '\n\t'.join(get_binary_variables(s, t, d))
+    binary_variables = ',\n\t'.join(get_binary_variables(s, t, d))
     return template.format(demand_constraints, capacity_constraints, non_negativity_constraints, binary_variables)
