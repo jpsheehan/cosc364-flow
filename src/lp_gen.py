@@ -9,12 +9,15 @@ SUBJECT TO
     {0}
     \\ CAPACITY CONSTRAINTS
     {1}
+    \\ BINARY VARIABLE CONSTRAINTS
+    {2}
 BOUNDS
     \\ NON-NEGATIVITY CONSTRAINTS
-    {2}
+    r > 0
+    {3}
 BIN
     \\ BINARY VARIABLES
-    {3};
+    {4}
 END
 """
 
@@ -29,20 +32,31 @@ def get_nodes(x, y, z):
 
 def get_demand_constraints(s, t, d):
     """ Returns a list of demand constraints. """
-    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(2*i + j)
+    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(2 * i + j)
             for (i, j) in perms([s, d])]
 
 
 def get_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints. """
-    # not sure about this
-    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) + ' - r <= 0' for (i, k) in perms([s, t])] + [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) + ' - r <= 0' for (k, j) in perms([t, d])]
+    return \
+        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) +
+            ' - C_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])] + \
+        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) +
+            ' - D_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]  # + \
+    # [' + '.join(["C_{0}{1}".format(i, j) for i in s]) +
+    # ' - r <= 0' for j in d]
+    # don't know about the above commented lines
+
+
+def get_binary_constraints(s, t, d):
+    """ Returns a list of binary variable constraints. """
+    return [' + '.join(["U_{0}{1}{2}".format(i, k, j) for k in t]) + ' = 2'
+            for (i, j) in perms([s, d])]
 
 
 def get_binary_variables(s, t, d):
     """ Returns a list of binary variables. """
-    # not sure about this
-    return ["U_{0}{1}".format(i, j) for (i, j) in perms([s, d])]
+    return ["U_{0}{1}{2}".format(i, k, j) for (i, k, j) in perms([s, t, d])]
 
 
 def get_non_negativity_constraints(s, t, d):
@@ -58,5 +72,12 @@ def generate_lp_file(x, y, z):
     capacity_constraints = '\n\t'.join(get_capacity_constraints(s, t, d))
     non_negativity_constraints = '\n\t'.join(get_non_negativity_constraints(
         s, t, d))
-    binary_variables = ',\n\t'.join(get_binary_variables(s, t, d))
-    return template.format(demand_constraints, capacity_constraints, non_negativity_constraints, binary_variables)
+    binary_variable_constraints = '\n\t'.join(get_binary_constraints(s, t, d))
+    binary_variables = '\n\t'.join(get_binary_variables(s, t, d))
+
+    return template.format(
+        demand_constraints,
+        capacity_constraints,
+        binary_variable_constraints,
+        non_negativity_constraints,
+        binary_variables)

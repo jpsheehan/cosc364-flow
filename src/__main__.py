@@ -1,7 +1,7 @@
 import sys
 
 from lp_gen import generate_lp_file
-from lp_utils import get_lp_filename
+from lp_utils import get_lp_filename, run_cplex
 
 __TITLE__ = "COSC-364 Assignment 2"
 __AUTHORS__ = [("Will Cowper", ""), ("Jesse Sheehan", "53366509")]
@@ -62,6 +62,7 @@ def main():
         filename = get_lp_filename(x, y, z)
         save_lp_file(filename, data)
         print("Success: saved as '{0}'".format(filename))
+        run_cplex(filename)
 
 
 if __name__ == "__main__":
