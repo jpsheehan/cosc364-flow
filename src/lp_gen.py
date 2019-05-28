@@ -59,27 +59,27 @@ def get_nodes(x, y, z):
 
 def get_demand_constraints(s, t, d):
     """ Returns a list of demand constraints. """
-    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(DEMAND_FLOW(i, j))
+    return [' + '.join(["x_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {0}'.format(DEMAND_FLOW(i, j))
             for (i, j) in perms([s, d])]
 
 
 def get_source_transit_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints for the links between the source and transit nodes. """
     return \
-        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for j in d]) +
-            ' - C_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])]
+        [' + '.join(["x_{0}{1}{2}".format(i, k, j) for j in d]) +
+            ' - c_{0}{1} = 0'.format(i, k) for (i, k) in perms([s, t])]
 
 
 def get_transit_destination_capacity_constraints(s, t, d):
     """ Returns a list of capacity constraints for the links between the transit and destination nodes. """
     return \
-        [' + '.join(["X_{0}{1}{2}".format(i, k, j) for i in s]) +
-            ' - D_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]
+        [' + '.join(["x_{0}{1}{2}".format(i, k, j) for i in s]) +
+            ' - d_{0}{1} = 0'.format(k, j) for (k, j) in perms([t, d])]
 
 
 def get_transit_load_constraints(s, t, d):
     """ Returns the list of transit load constraints. """
-    return [' + '.join(["X_{0}{1}{2}".format(i, k, j) for (i, j) in perms([s, d])]) +
+    return [' + '.join(["x_{0}{1}{2}".format(i, k, j) for (i, j) in perms([s, d])]) +
             ' - l_{0} = 0'.format(k) for k in t]
 
 def get_objective_function_load_constraints(s, t, d):
@@ -94,18 +94,18 @@ def get_binary_and_decision_variable_constraints(s, t, d):
 
 def get_binary_constraints(s, t, d):
     """ Returns a list of binary variable constraints. """
-    return [' + '.join(["U_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {}'.format(PATH_SPLIT)
+    return [' + '.join(["u_{0}{1}{2}".format(i, k, j) for k in t]) + ' = {}'.format(PATH_SPLIT)
             for (i, j) in perms([s, d])]
 
 
 def get_binary_variables(s, t, d):
     """ Returns a list of binary variables. """
-    return ["U_{0}{1}{2}".format(i, k, j) for (i, k, j) in perms([s, t, d])]
+    return ["u_{0}{1}{2}".format(i, k, j) for (i, k, j) in perms([s, t, d])]
 
 
 def get_non_negativity_constraints(s, t, d):
     """ Returns a list of non-negativity constraints. """
-    return ["X_{0} >= 0".format(subscript) for subscript in concat(perms([s, t, d]))]
+    return ["x_{0} >= 0".format(subscript) for subscript in concat(perms([s, t, d]))]
 
 def generate_lp_file(x, y, z):
     """ Returns the LP file contents as per the project specification. """
