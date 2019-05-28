@@ -44,7 +44,7 @@ def get_problem_parameters():
 def save_lp_file(filename, data):
     try:
         f = open(filename, 'w')
-        f.write(data.encode())
+        f.write(data)
         f.close()
     except:
         print("Error: could not save file '{0}'".format(filename))
@@ -61,6 +61,7 @@ def main():
         data = generate_lp_file(x, y, z)
         filename = get_lp_filename(x, y, z)
         save_lp_file(filename, data)
+        print("Success: saved as '{0}'".format(filename))
 
 
 if __name__ == "__main__":
