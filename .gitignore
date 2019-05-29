@@ -5,3 +5,4 @@ __pycache__/
 *.pyc
 !/report/report.pdf
 !/report/report.tex
+/cplex_data.csv
