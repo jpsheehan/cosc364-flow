@@ -235,14 +235,25 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 \subsection{Source Code}
 \label{section:source}
 
-\subsubsection{src/\_\_main\_\_.py}
-\lstinputlisting[language=Python]{../src/__main__.py}
-
-\subsubsection{src/lp\_utils.py}
-\lstinputlisting[language=Python]{../src/lp_utils.py}
-
 \subsubsection{src/lp\_gen.py}
+This script is responsible for producing a valid LP file from the given command line parameters.
 \lstinputlisting[language=Python]{../src/lp_gen.py}
+
+\subsubsection{src/lp\_csv.py}
+This script is responsible for converting the output of the CPLEX log files into a single CSV file for further processing.
+\lstinputlisting[language=Python]{../src/lp_csv.py}
+
+\subsubsection{src/lp\_graph.py}
+This script is responsible for reading the CSV file and producing several graphs.
+\lstinputlisting[language=Python]{../src/lp_graph.py}
+
+\subsubsection{output.sh}
+This BASH script is responsible for executing the other scripts as well as timing and running CPLEX (under the Linux operating system).
+\lstinputlisting[language=BASH]{../output.sh}
+
+\subsubsection{output.ps1}
+This PowerShell script is responsible for executing the other scripts as well as timing and running CPLEX (under the Windows operating system).
+\lstinputlisting{../output.ps1}
 
 % Add any other source files we've used
 
