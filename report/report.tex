@@ -38,6 +38,7 @@
 \usepackage{subcaption}
 \usepackage{listings}
 \usepackage{color}
+\usepackage[justification=centering]{caption}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -92,7 +93,7 @@
 
 %% TITLE
 \title{\uppercase{
-	Traffic Planning\\
+	Flow Planning\\
 	\large{Assignment 2} \\
 	\small{COSC364-19S1 Internet Technology and Engineering}
 }}
@@ -111,6 +112,13 @@
 \begin{document}
 
 \maketitle
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{traffic}
+	\caption{An artist's impression of a traffic problem outside of the Jack Erskine building (J. P. Sheehan, May 2019).}
+	\label{fig:traffic}
+\end{figure}
 
 \includepdf{includes/plagiarism_declaration.pdf}
 
