@@ -114,16 +114,27 @@
 
 \maketitle
 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{network}
+	\caption{An example network (Wilig, 2019).}
+	\label{fig:network}
+\end{figure}
+
 \newpage
 
 \section{Problem Formulation}
 
-TALK ABOUT PROBLEM HERE. REFERENCE THE CONSTRAINT EQUATIONS AS WE GO. TRY TO ADDRESS EACH CONSTRAINT\\
+Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit nodes and $Z$ destination nodes, a program was designed to generate an LP file that could be used by CPLEX to determine certain network characteristics.
+Traffic travelling from $S_i$ to $D_j$ must travel through exactly 2 transit nodes with a total demand volume of $h_{ij}$ (equation \ref{eq:demand_definition}). This problem was solved with the use of binary variable constraints (equations \ref{eq:binary_select_constraint}, \ref{eq:binary_constraint} and \ref{eq:binary_definition}) and the minimisation of our objective function (equation \ref{eq:obj_func_def}).
+All normal non-negativity constraints were applied (equations \ref{eq:obj_function_nn}, \ref{eq:decision_var_nn}, \ref{eq:source_capacity_nn} and \ref{eq:dest_capacity_nn}).\\
 
-% The network is defined as having $X$ source nodes ($S_1,\ S_2,\ \ldots,\ S_X$), $Y$ transit nodes ($T_1,\ T_2,\ \ldots,\ T_Y$) and $Z$ destination nodes ($D_1,\ D_2,\ \ldots,\ D_Z$). All transit nodes are directly connected to all source and destination nodes. Source and destination nodes are only connected directly to transit nodes. In this way, all source nodes are connected to all destination nodes via all transit nodes.
-% The demand flow between source $i$ and destination $j$ is $h_{ij} = 2i + j$. Additionally, the load from source $i$ to destination $j$ must go through exactly two transit nodes. \\
-
-% As this is a load balancing problem, we are looking to minimize the object function $r$. Where $r$ is the... (IS THIS CORRECT? EXPLAIN) \\
+\noindent The following network properties were solved for:
+\begin{itemize}
+	\item The capacities of each link (equations \ref{eq:source_capacity_constraint} and \ref{eq:dest_capacity_constraint}).
+	\item The load on each transit node (equation \ref{eq:transit_link_capacity_constraint}).
+	\item The value of each flow (equations \ref{eq:demand_flow_constraint} and \ref{eq:decision_var_constraint}).
+\end{itemize}
 
 \noindent \textbf{Notation:}
 \begin{itemize}
@@ -143,38 +154,50 @@ TALK ABOUT PROBLEM HERE. REFERENCE THE CONSTRAINT EQUATIONS AS WE GO. TRY TO ADD
 
 \noindent \textbf{Note:} Due to the limitations of the LP file format, many of the following equations must be rearranged for use in CPLEX. Most notably, there cannot be any variables on the right hand side of an equality or inequality.
 
+\newpage
+
 \subsection{Objective Function}
 
 \begin{align}
+\label{eq:obj_func_def}
 \text{minimize}_{[x, c, d, r]}\ r
 \end{align}
 
 \subsection{Constraints}
 
 \begin{align}
+\label{eq:demand_flow_constraint}
 \sum_{k = 1}^{Y} x_{ikj} &= h_{ij} & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:source_capacity_constraint}
 \sum_{j = 1}^{Z} x_{ikj} &= c_{ik} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\[1em]
+\label{eq:dest_capacity_constraint}
 \sum_{i = 1}^{X} x_{ikj} &= d_{kj} & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:transit_link_capacity_constraint}
 \sum_{k = 1}^{Y} x_{ikj} &= l_k & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:binary_select_constraint}
 \sum_{k = 1}^{Y} u_{ikj} &= 2 & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:binary_constraint}
 x_{ikj} &= \frac{u_{ikj}h_{ij}}{2} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:decision_var_constraint}
 \sum_{i = 1}^{X} \sum_{j = 1}^{Z} x_{ikj} &\leq r & k \in \{1, \ldots, Y\} \\[1em]
+\label{eq:binary_definition}
 u_{ikj} &\in \{0, 1\} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:demand_definition}
 h_{ij} &= 2i + j & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
 \end{align}
 
 \subsection{Non-Negativity Constraints}
 
 \begin{align}
+\label{eq:obj_function_nn}
 r &\geq 0 \\[1em]
-x_{ijk} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:decision_var_nn}
+x_{ikj} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\label{eq:source_capacity_nn}
 c_{ik} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\[1em]
+\label{eq:dest_capacity_nn}
 d_{kj} &\geq 0 & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
 \end{align}
-
-% Discuss the different types of constraints and how we define them mathematically
-
-% Demand Constraints
 
 \section{Results}
 
