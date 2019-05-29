@@ -10,5 +10,5 @@ do
    echo -e "\nelapsed_time: $duration ms" >> cplex_logs/$y.txt
 done
 
-python3 src/lp_csv.py cplex_logs cplex_data.csv
-python3 src/lp_graph.py cplex_data.csv graphs
+python3 src/lp_csv.py cplex_logs lp_files/cplex_data.csv
+python3 src/lp_graph.py lp_files/cplex_data.csv graphs
