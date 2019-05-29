@@ -33,7 +33,7 @@ def get_problem_parameters():
         print("Error: x must be less than ten")
         exit(-1)
 
-    if y < 0:
+    if y <= 0:
         print("Error: y must be strictly positive")
         exit(-1)
 
