@@ -1,9 +1,27 @@
 # COSC364 Flow Planning Assignment
 
-## Prior Understanding
+Written by Will Cowper and Jesse Sheehan
 
-Read, understand and solve the following problems in the planning booklet (version 1.0):
+## Usage:
 
-- [ ] Problem 7.4.1
-- [ ] Problem 7.4.2
-- [ ] Problem 5.2.6
+Running the following command will generate the LP files, process the CPLEX output, produce a CSV file containing key data, and save the graphs. The report can be made seperately using a LaTeX editor.
+
+### Windows (7 or later):
+
+```
+output.ps1
+```
+
+### Linux:
+
+```
+output.sh
+```
+
+## Report
+
+Read the [report](https://github.com/jpsheehan/cosc364-flow/blob/master/report/report.pdf).
+
+## Grade
+
+Not yet marked
