@@ -1,17 +1,10 @@
 import functools
-import subprocess
 import inspect
 
 
 def get_lp_filename(x, y, z):
     """ Returns the filename that the LP data should be saved to. """
     return "problem_{0}_{1}_{2}.lp".format(x, y, z)
-
-
-def run_cplex(filename):
-    """ Runs cplex on the LP file. """
-    subprocess.run(
-        ['cplex', '-c', '"read {0}"'.format(filename), '"optimize"', '"display solution variables -"'])
 
 
 def crange(first, last):

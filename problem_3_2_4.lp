@@ -1,4 +1,4 @@
-\ COSC-364 Assignment 2, LP Output File
+\ COSC-364 Assignment 2 LP Generator, LP Output File
 \ Written by Will Cowper (81163265), Jesse Sheehan (53366509)
 \ Parameters: X=3, Y=2, Z=4, Split=2, Demand=2 * i + j
 
