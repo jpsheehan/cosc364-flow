@@ -29,12 +29,24 @@ def get_problem_parameters():
         print("Error: x must be strictly positive")
         exit(-1)
 
+    if x >= 10:
+        print("Error: x must be less than ten")
+        exit(-1)
+
     if y < 0:
         print("Error: y must be strictly positive")
         exit(-1)
 
+    if y >= 10:
+        print("Error: y must be less than ten")
+        exit(-1)
+
     if z <= 0:
         print("Error: z must be strictly positive")
+        exit(-1)
+
+    if z <= 10:
+        print("Error: z must be less than ten")
         exit(-1)
 
     return x, y, z
@@ -49,9 +61,11 @@ def save_lp_file(filename, data):
         print("Error: could not save file '{0}'".format(filename))
         exit(-1)
 
+
 def get_author_string():
     return ', '.join(
         ["{0} ({1})".format(name, sid) for (name, sid) in __AUTHORS__])
+
 
 def main():
     print_version()
