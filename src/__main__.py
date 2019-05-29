@@ -45,7 +45,7 @@ def get_problem_parameters():
         print("Error: z must be strictly positive")
         exit(-1)
 
-    if z <= 10:
+    if z >= 10:
         print("Error: z must be less than ten")
         exit(-1)
 
