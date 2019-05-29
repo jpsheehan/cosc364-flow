@@ -19,7 +19,7 @@ def openFile(Y):
         # Y
         data.append(Y)
         # elapsed time
-        data.append(max(parseFile("elapsed", lines)))
+        data.append(max(parseFile("elapsed_", lines)))
         # no of non-zero c links
         data.append(len(parseFile("c_", lines)))
         # no of non-zero d links
