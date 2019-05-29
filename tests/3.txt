@@ -28,7 +28,7 @@ Probing time = 0.00 sec. (0.07 ticks)
 Clique table members: 81.
 MIP emphasis: balance optimality and feasibility.
 MIP search method: dynamic search.
-Parallel mode: deterministic, using up to 4 threads.
+Parallel mode: deterministic, using up to 8 threads.
 Root relaxation solution time = 0.00 sec. (0.63 ticks)
 
         Nodes                                         Cuts/
@@ -49,7 +49,7 @@ Gomory fractional cuts applied:  1
 
 Root node processing (before b&c):
   Real time             =    0.02 sec. (6.59 ticks)
-Parallel b&c, 4 threads:
+Parallel b&c, 8 threads:
   Real time             =    0.00 sec. (0.00 ticks)
   Sync time (average)   =    0.00 sec.
   Wait time (average)   =    0.00 sec.
@@ -59,8 +59,8 @@ Total (root+branch&cut) =    0.02 sec. (6.59 ticks)
 Solution pool: 4 solutions saved.
 
 MIP - Integer optimal solution:  Objective =  4.0500000000e+02
-Solution time =    0.02 sec.  Iterations = 101  Nodes = 0
-Deterministic time = 6.59 ticks  (297.44 ticks/sec)
+Solution time =    0.03 sec.  Iterations = 101  Nodes = 0
+Deterministic time = 6.59 ticks  (260.85 ticks/sec)
 
 CPLEX> Incumbent solution
 Variable Name           Solution Value
@@ -445,4 +445,4 @@ u_929                         1.000000
 u_931                         1.000000
 u_934                         1.000000
 All other variables in the range 1-598 are 0.
-CPLEX> elapsed time: 44 us
+CPLEX> elapsed time: 47 ms
