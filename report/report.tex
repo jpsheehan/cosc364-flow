@@ -111,7 +111,10 @@
 \begin{document}
 
 \maketitle
-\section{Problem Formulation}
+
+\includepdf{includes/plagiarism_declaration.pdf}
+
+\section{Problem Description}
 
 Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit nodes and $Z$ destination nodes, a program was designed to generate an LP file that could be used by CPLEX to determine certain network characteristics.
 
@@ -122,7 +125,11 @@ Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit no
 	\label{fig:network}
 \end{figure}
 
-Traffic travelling from $S_i$ to $D_j$ must travel through exactly 2 transit nodes with a total demand volume of $h_{ij}$ (equation \ref{eq:demand_definition}). Furthermore, the load upon each transit node must be balanced. This problem was solved with the use of binary variable constraints (equations \ref{eq:binary_select_constraint}, \ref{eq:binary_constraint} and \ref{eq:binary_definition}) and the minimisation of our objective function (equation \ref{eq:obj_func_def}).
+Traffic travelling from $S_i$ to $D_j$ must travel through exactly 2 transit nodes with a total demand volume of $h_{ij}$ (equation \ref{eq:demand_definition}). Furthermore, the load upon each transit node must be balanced.
+
+\section{Problem Formulation}
+
+\noindent This problem was solved with the use of binary variable constraints (equations \ref{eq:binary_select_constraint}, \ref{eq:binary_constraint} and \ref{eq:binary_definition}) and the minimisation of our objective function (equation \ref{eq:obj_func_def}).
 All normal non-negativity constraints were applied (equations \ref{eq:obj_function_nn}, \ref{eq:decision_var_nn}, \ref{eq:source_capacity_nn} and \ref{eq:dest_capacity_nn}).\\
 
 \noindent The following network properties were solved for:
@@ -197,6 +204,19 @@ d_{kj} &\geq 0 & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
 
 \section{Results}
 
+LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$. These were then processed with CPLEX, recording the time taken to solve each problem. Important data points were extracted from the CPLEX output and are listed in table \ref{tab:results}.
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{|l|}
+		... your table ...
+	\end{tabular}
+	\caption{insert caption here, yo!}
+	\label{tab:results}
+\end{table}
+
+% ALSO DO A GRAPH?
+
 % Show results for the CPLEX execution time, the number of links with non-zero capacities, the spread of the transit node loads (the difference between the largest and the smallest transit node load), and the highest capacity links, for all varying Y.
 % Show these results as a graph or a table.
 % Please explain the results
@@ -205,6 +225,7 @@ d_{kj} &\geq 0 & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
 
 
 \subsection{Source Code}
+\label{section:source}
 
 \subsubsection{src/\_\_main\_\_.py}
 \lstinputlisting[language=Python]{../src/__main__.py}
