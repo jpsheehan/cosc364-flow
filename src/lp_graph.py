@@ -19,11 +19,11 @@ def get_time(data):
 
 
 def get_len_nonzero_links(data):
-    return list(map(lambda d: d["len_c_links"] + d["len_d_links"], data))
+    return get_data(data, "len_links")
 
 
 def get_transit_load_spread(data):
-    return list(map(lambda d: d["max_load"] - d["min_load"], data))
+    return get_data(data, "load_spread")
 
 
 def get_max_cap_c(data):
@@ -91,11 +91,9 @@ def get_data_from_csv(csv_filename):
     """ Returns an array of dictionaries containing the CSV data. """
     with open(csv_filename, newline='') as csv_file:
         csv_reader = csv.DictReader(csv_file, fieldnames=[
-                                    "Y", "time", "len_c_links", "len_d_links", "min_load", "max_load", "max_cap_c", "max_cap_d"])
+                                    "Y", "time", "len_links", "load_spread", "max_cap_c", "max_cap_d"])
         rows = []
         for row in csv_reader:
-            if csv_reader.line_num == 1:
-                continue
             d = {}
             for key in row:
                 d[key] = float(row[key])

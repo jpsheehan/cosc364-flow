@@ -11,6 +11,10 @@ def csvWrite(data):
     return
 
 
+def floatmap(enumerable):
+    return list(map(lambda x: float(x), enumerable))
+
+
 def openFile(Y):
     with open(os.path.join(sys.argv[1], '{0}.txt'.format(Y)), 'r') as in_file:
         stripped = [line.strip() for line in in_file.readlines()]
@@ -20,19 +24,15 @@ def openFile(Y):
         data.append(Y)
         # elapsed time
         data.append(max(parseFile("elapsed_", lines)))
-        # no of non-zero c links
-        data.append(len(parseFile("c_", lines)))
-        # no of non-zero d links
-        data.append(len(parseFile("d_", lines)))
-        # smallest_transit_node_load
-        data.append(min(parseFile("l_", lines)))
-        # largest_transit_node_load
-        data.append(max(parseFile("l_", lines)))
+        # no of non-zero c and d links
+        data.append(len(parseFile("c_", lines)) + len(parseFile("d_", lines)))
+        # transit load spread (largest_transit_node_load - smallest_transit_node_load)
+        data.append(max(floatmap(parseFile("l_", lines))) -
+                    min(floatmap(parseFile("l_", lines))))
         # highest cap c network
         data.append(max(parseFile("c_", lines)))
         # highest cap d network
         data.append(max(parseFile("d_", lines)))
-        print(data)
         csvWrite(data)
 
         return
@@ -55,9 +55,14 @@ if __name__ == "__main__":
         print("Usage: {0} <input directory> <csv file>".format(sys.argv[0]))
         exit(-1)
 
+    # delete the CSV, otherwise we will append to it
+    os.unlink(sys.argv[2])
+
     openFile(3)
     openFile(4)
     openFile(5)
     openFile(6)
     openFile(7)
     openFile(8)
+
+    print("Saved CSV data to '{}'".format(sys.argv[2]))
