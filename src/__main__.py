@@ -1,4 +1,5 @@
 import sys
+import os.path
 
 from lp_gen import generate_lp_file
 from lp_utils import get_lp_filename
@@ -12,7 +13,7 @@ def print_version():
 
 
 def print_usage():
-    print('Usage: {0} <x> <y> <z>'.format(sys.argv[0]))
+    print('Usage: {0} <x> <y> <z> [output directory]'.format(sys.argv[0]))
 
 
 def get_problem_parameters():
@@ -69,13 +70,17 @@ def get_author_string():
 
 def main():
     print_version()
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 4 and len(sys.argv) != 5:
         print_usage()
         exit(-1)
     else:
+        output_dir = '.'
+        if len(sys.argv) == 5:
+            output_dir = sys.argv[4]
+
         x, y, z = get_problem_parameters()
         data = generate_lp_file(__TITLE__, get_author_string(), x, y, z)
-        filename = get_lp_filename(x, y, z)
+        filename = os.path.join(output_dir, get_lp_filename(x, y, z))
         save_lp_file(filename, data)
         print("Success: saved as '{0}'".format(filename))
 
