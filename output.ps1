@@ -6,4 +6,4 @@ For ($i=3; $i -le 8; $i++) {
 }
 
 python src/lp_csv.py cplex_logs cplex_data.csv
-python src/lp_csv_plot.py cplex_data.csv graphs
+python src/lp_graph.py cplex_data.csv graphs

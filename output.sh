@@ -11,4 +11,4 @@ do
 done
 
 python3 src/lp_csv.py cplex_logs cplex_data.csv
-python3 src/lp_csv_plot.py cplex_data.csv graphs
+python3 src/lp_graph.py cplex_data.csv graphs
