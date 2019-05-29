@@ -5,7 +5,8 @@ PATH_SPLIT = 2
 DEMAND_FLOW = lambda i, j: 2 * i + j
 
 TEMPLATE = """\
-\\ COSC-364 Assignment 2, LP Output File
+\\ {}, LP Output File
+\\ Written by {}
 \\ Parameters: X={}, Y={}, Z={}, Split={}, Demand={}
 
 MINIMIZE
@@ -107,7 +108,7 @@ def get_non_negativity_constraints(s, t, d):
     """ Returns a list of non-negativity constraints. """
     return ["x_{0}{1}{2} >= 0".format(i, k, j) for (i, k, j) in perms([s, t, d])] + ["c_{0}{1} >= 0".format(i, k) for (i, k) in perms([s, t])] + ["d_{0}{1} >= 0".format(k, j) for (k, j) in perms([t, d])]
 
-def generate_lp_file(x, y, z):
+def generate_lp_file(title, authors, x, y, z):
     """ Returns the LP file contents as per the project specification. """
     s, t, d = get_nodes(x, y, z)
 
@@ -126,6 +127,8 @@ def generate_lp_file(x, y, z):
     binary_variables = get_lines(get_binary_variables(s, t, d))
 
     return TEMPLATE.format(
+        title,
+        authors,
         x,
         y,
         z,

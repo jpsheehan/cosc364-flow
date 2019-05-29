@@ -1,6 +1,5 @@
 /.vscode/ipch/
 __pycache__/
-/*.lp
 /cplex.log
 /report/report.*
 *.pyc

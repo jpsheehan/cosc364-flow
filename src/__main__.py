@@ -1,15 +1,14 @@
 import sys
 
 from lp_gen import generate_lp_file
-from lp_utils import get_lp_filename, run_cplex
+from lp_utils import get_lp_filename
 
-__TITLE__ = "COSC-364 Assignment 2"
+__TITLE__ = "COSC-364 Assignment 2 LP Generator"
 __AUTHORS__ = [("Will Cowper", "81163265"), ("Jesse Sheehan", "53366509")]
 
 
 def print_version():
-    print('{0} by {1}'.format(__TITLE__, ', '.join(
-        ["{0} ({1})".format(name, sid) for (name, sid) in __AUTHORS__])))
+    print('{0} by {1}'.format(__TITLE__, get_author_string()))
 
 
 def print_usage():
@@ -50,6 +49,9 @@ def save_lp_file(filename, data):
         print("Error: could not save file '{0}'".format(filename))
         exit(-1)
 
+def get_author_string():
+    return ', '.join(
+        ["{0} ({1})".format(name, sid) for (name, sid) in __AUTHORS__])
 
 def main():
     print_version()
@@ -58,11 +60,10 @@ def main():
         exit(-1)
     else:
         x, y, z = get_problem_parameters()
-        data = generate_lp_file(x, y, z)
+        data = generate_lp_file(__TITLE__, get_author_string(), x, y, z)
         filename = get_lp_filename(x, y, z)
         save_lp_file(filename, data)
         print("Success: saved as '{0}'".format(filename))
-        run_cplex(filename)
 
 
 if __name__ == "__main__":

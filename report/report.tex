@@ -92,7 +92,9 @@
 
 %% TITLE
 \title{\uppercase{
-	COSC-364 Flow Planning Assignment
+	Traffic Planning\\
+	\large{Assignment 2} \\
+	\small{COSC364-19S1 Internet Technology and Engineering}
 }}
 \date{\today}
 \author{
@@ -109,20 +111,18 @@
 \begin{document}
 
 \maketitle
+\section{Problem Formulation}
+
+Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit nodes and $Z$ destination nodes, a program was designed to generate an LP file that could be used by CPLEX to determine certain network characteristics.
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{network}
+	\includegraphics[width=0.7\textwidth]{network}
 	\caption{An example network (A. Willig, April 2019).}
 	\label{fig:network}
 \end{figure}
 
-\newpage
-
-\section{Problem Formulation}
-
-Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit nodes and $Z$ destination nodes, a program was designed to generate an LP file that could be used by CPLEX to determine certain network characteristics.
-Traffic travelling from $S_i$ to $D_j$ must travel through exactly 2 transit nodes with a total demand volume of $h_{ij}$ (equation \ref{eq:demand_definition}). This problem was solved with the use of binary variable constraints (equations \ref{eq:binary_select_constraint}, \ref{eq:binary_constraint} and \ref{eq:binary_definition}) and the minimisation of our objective function (equation \ref{eq:obj_func_def}).
+Traffic travelling from $S_i$ to $D_j$ must travel through exactly 2 transit nodes with a total demand volume of $h_{ij}$ (equation \ref{eq:demand_definition}). Furthermore, the load upon each transit node must be balanced. This problem was solved with the use of binary variable constraints (equations \ref{eq:binary_select_constraint}, \ref{eq:binary_constraint} and \ref{eq:binary_definition}) and the minimisation of our objective function (equation \ref{eq:obj_func_def}).
 All normal non-negativity constraints were applied (equations \ref{eq:obj_function_nn}, \ref{eq:decision_var_nn}, \ref{eq:source_capacity_nn} and \ref{eq:dest_capacity_nn}).\\
 
 \noindent The following network properties were solved for:
@@ -220,7 +220,7 @@ d_{kj} &\geq 0 & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
 \subsection{Generated LP File}
 
 \subsubsection{problem\_3\_2\_4.lp}
-% \lstinputlisting[language=Python]{../src/__main__.py}
+\lstinputlisting{../problem_3_2_4.lp}
 
 % Ask Andreas about this one! The parameters of this file directly contradict the spec!
 
