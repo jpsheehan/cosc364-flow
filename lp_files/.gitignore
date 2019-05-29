@@ -1,5 +1,6 @@
 *
 !.gitignore
+!cplex_data.csv
 !problem_3_2_4.lp
 !problem_9_3_9.lp
 !problem_9_4_9.lp
