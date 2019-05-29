@@ -27,7 +27,6 @@
 \usepackage{paralist} % very flexible & customisable lists (eg. enumerate/itemize, etc.)
 \usepackage{verbatim} % adds environment for commenting out blocks of text & for better verbatim
 %\usepackage{subfig} % make it possible to include more than one captioned figure/table in a single float
-\usepackage{pdfpages}
 \usepackage{amsmath,mathtools,amsfonts}
 \usepackage{bm}
 \usepackage{blindtext}
@@ -39,6 +38,10 @@
 \usepackage{listings}
 \usepackage{color}
 \usepackage[justification=centering]{caption}
+\usepackage[utf8]{inputenc}
+\usepackage{pgfplotstable,filecontents}
+\usepackage{csvsimple}
+\usepackage{pdfpages}
 
 \definecolor{mygreen}{rgb}{0,0.6,0}
 \definecolor{mygray}{rgb}{0.5,0.5,0.5}
@@ -216,12 +219,12 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 
 \begin{table}[H]
 	\centering
-	\begin{tabular}{|l|}
-		... your table ...
-	\end{tabular}
-	\caption{insert caption here, yo!}
+	\caption{The raw data as extracted and processed from the CPLEX output.}
+	\csvautotabular[table head=\hline \textbf{Y} & \textbf{Time (ms)} & \textbf{Links} & \textbf{Load Spread} & \textbf{Max. $\bf{c_{ik}}$} & \textbf{Max. $\bf{d_kj}$}\\ \hline \csvlinetotablerow\\]{../lp_files/cplex_data.csv}
 	\label{tab:results}
 \end{table}
+
+\noindent Write some stuff...
 
 \begin{figure}[H]
 	\centering
