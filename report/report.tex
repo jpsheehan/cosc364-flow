@@ -132,7 +132,7 @@ Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit no
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{network}
-	\caption{An example network showing nodes $S_i$, $T_k$ and $D_j$ and links $c_{ik}$ and $d_{kj}$.}
+	\caption{An example network showing nodes $S_i$, $T_k$ and $D_j$ and links $c_{ik}$ and $d_{kj}$, $i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}$.}
 	\label{fig:network}
 \end{figure}
 
@@ -149,6 +149,8 @@ All normal non-negativity constraints were applied (equations \ref{eq:obj_functi
 	\item The load on each transit node (equation \ref{eq:transit_link_capacity_constraint}).
 	\item The value of each flow (equations \ref{eq:demand_flow_constraint} and \ref{eq:decision_var_constraint}).
 \end{itemize}
+
+\newpage
 
 \noindent \textbf{Notation:}
 \begin{itemize}
