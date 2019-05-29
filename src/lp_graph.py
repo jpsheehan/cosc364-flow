@@ -75,8 +75,8 @@ def save_highest_capacity_links_plot(filename, data):
     """ Saves a plot of the transit load spread. """
     width = 0.4
     Ys = np.array(get_Y(data))
-    cs = plt.bar(Ys, get_max_cap_c(data), width, label="$C_{ik}$")
-    ds = plt.bar(Ys + width, get_max_cap_d(data), width, label="$D_{kj}$")
+    cs = plt.bar(Ys, get_max_cap_c(data), width, label="$c_{ik}$")
+    ds = plt.bar(Ys + width, get_max_cap_d(data), width, label="$d_{kj}$")
     plt.xticks(Ys + width / 2, map(lambda x: int(x), Ys))
     plt.legend(handles=[cs, ds])
     plt.xlabel("Y")
