@@ -46,6 +46,7 @@ def save_execution_time_plot(filename, data):
     plt.title("CPLEX Execution Time")
     plt.savefig(filename)
     plt.close()
+    print("Saved '{}'".format(filename))
 
 
 def save_num_nonzero_links_plot(filename, data):
@@ -56,6 +57,7 @@ def save_num_nonzero_links_plot(filename, data):
     plt.title("Number of Non-Zero Link Capacities")
     plt.savefig(filename)
     plt.close()
+    print("Saved '{}'".format(filename))
 
 
 def save_transit_load_spread_plot(filename, data):
@@ -66,6 +68,7 @@ def save_transit_load_spread_plot(filename, data):
     plt.title("Transit Node Load Spread")
     plt.savefig(filename)
     plt.close()
+    print("Saved '{}'".format(filename))
 
 
 def save_highest_capacity_links_plot(filename, data):
@@ -81,6 +84,7 @@ def save_highest_capacity_links_plot(filename, data):
     plt.title("Highest Link Capacities")
     plt.savefig(filename)
     plt.close()
+    print("Saved '{}'".format(filename))
 
 
 def get_data_from_csv(csv_filename):
