@@ -168,7 +168,16 @@ All normal non-negativity constraints were applied (equations \ref{eq:obj_functi
 \item $l_{k}$ is the load on $T_k$.
 \end{itemize}
 
-\noindent \textbf{Note:} Due to the limitations of the LP file format, many of the following equations must be rearranged for use in CPLEX. Most notably, there cannot be any variables on the right hand side of an equality or inequality.
+\noindent \textbf{Note:} Due to the limitations of the LP file format, many of the following equations must be rearranged for use in CPLEX. Most notably, there cannot be any variables on the right hand side of an equality or inequality. \\
+
+\noindent Python, BASH and PowerShell scripts (section \ref{section:source}) were used to automate the process (figure \ref{fig:scriptflow}) of generating the LP files, analysing the CPLEX data, and producing graphs.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\textwidth]{scriptflow}
+	\caption{A graphical interpretation of the script execution used.}
+	\label{fig:scriptflow}
+\end{figure}
 
 \newpage
 
