@@ -4,11 +4,9 @@ import os.path
 
 
 def csvWrite(data):
-    with open(sys.argv[2], 'a') as csvFile:
+    with open(sys.argv[2], 'a', newline='') as csvFile:
         writer = csv.writer(csvFile)
         writer.writerow(data)
-
-    return
 
 
 def floatmap(enumerable):
@@ -34,8 +32,6 @@ def openFile(Y):
         # highest cap d network
         data.append(max(parseFile("d_", lines)))
         csvWrite(data)
-
-        return
 
 
 '''Returns a list of all values that start with the given string'''
