@@ -105,7 +105,7 @@ def get_binary_variables(s, t, d):
 
 def get_non_negativity_constraints(s, t, d):
     """ Returns a list of non-negativity constraints. """
-    return ["x_{0} >= 0".format(subscript) for subscript in concat(perms([s, t, d]))]
+    return ["x_{0}{1}{2} >= 0".format(i, k, j) for (i, k, j) in perms([s, t, d])] + ["c_{0}{1} >= 0".format(i, k) for (i, k) in perms([s, t])] + ["d_{0}{1} >= 0".format(k, j) for (k, j) in perms([t, d])]
 
 def generate_lp_file(x, y, z):
     """ Returns the LP file contents as per the project specification. """
