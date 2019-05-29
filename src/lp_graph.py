@@ -1,7 +1,19 @@
+# lp_graph.py
+#
+# COSC364 Assignment 2
+# 30/05/2019
+# Written by Will Cowper, Jesse Sheehan
+
 import csv
 import sys
 import os.path
-import numpy as np
+
+try:
+    import numpy as np
+except:
+    print("Error: could not load 'numpy'. Install with 'pip install numpy' and then try again.")
+    exit(-1)
+
 
 try:
     import matplotlib.pyplot as plt

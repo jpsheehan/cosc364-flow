@@ -1,3 +1,9 @@
+# lp_gen.py
+#
+# COSC364 Assignment 2
+# 30/05/2019
+# Written by Will Cowper, Jesse Sheehan
+
 import inspect
 import functools
 import sys
