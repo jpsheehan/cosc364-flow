@@ -134,8 +134,8 @@
 \item $h_{ij}$ is the demand flow between $S_i$ and $D_j$. This is equal to $2i + j$.
 \item $c_{ik}$ is the link capacity between $S_i$ and $T_k$.
 \item $d_{kj}$ is the link capacity between $T_k$ and $D_j$.
-\item $x_{ikj}$ is the decision variable associated with the...
-\item $u_{ikj}$ is the binary decision variable associated with the... These are required because $h_{ij}$ must be split across exactly two transit nodes.
+\item $x_{ikj}$ is the decision variable associated with the path $S_i$-$T_k$-$D_j$.
+\item $u_{ikj}$ is the binary decision variable associated with $x_{ikj}$. These are required because $h_{ij}$ must be split across exactly 2 transit nodes.
 \item $l_{k}$ is the load on $T_k$.
 \end{itemize}
 
@@ -144,31 +144,30 @@
 \subsection{Objective Function}
 
 \begin{align}
-\text{minimize}_{[r]}
+\text{minimize}_{[x, c, d, r]}\ r
 \end{align}
 
-\subsection{Demand Constraints}
+\subsection{Constraints}
 
 \begin{align}
-\sum_{k = 1}^{Y} x_{ikj} &= 2i + j & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
-\end{align}
-
-\subsection{Capacity Constraints}
-
-\begin{align}
+\sum_{k = 1}^{Y} x_{ikj} &= h_{ij} & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
 \sum_{j = 1}^{Z} x_{ikj} &= c_{ik} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\[1em]
 \sum_{i = 1}^{X} x_{ikj} &= d_{kj} & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
 \sum_{k = 1}^{Y} x_{ikj} &= l_k & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
 \sum_{k = 1}^{Y} u_{ikj} &= 2 & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\} \\[1em]
+x_{ikj} &= \frac{u_{ikj}h_{ij}}{2} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+\sum_{i = 1}^{X} \sum_{j = 1}^{Z} x_{ikj} &\leq r & k \in \{1, \ldots, Y\} \\[1em]
 u_{ikj} &\in \{0, 1\} & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
-\sum_{i = 1}^{X} c_{ij} &\leq r & j \in \{1, \ldots, Z\}
+h_{ij} &= 2i + j & i \in \{1, \ldots, X\}, j \in \{1, \ldots, Z\}
 \end{align}
 
 \subsection{Non-Negativity Constraints}
 
 \begin{align}
 r &\geq 0 \\[1em]
-x_{ijk} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
+x_{ijk} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\} \\[1em]
+c_{ik} &\geq 0 & i \in \{1, \ldots, X\}, k \in \{1, \ldots, Y\} \\[1em]
+d_{kj} &\geq 0 & k \in \{1, \ldots, Y\}, j \in \{1, \ldots, Z\}
 \end{align}
 
 % Discuss the different types of constraints and how we define them mathematically

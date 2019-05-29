@@ -89,7 +89,7 @@ def get_objective_function_load_constraints(s, t, d):
 
 def get_binary_and_decision_variable_constraints(s, t, d):
     """ Returns the binary and decision variable constraints. """
-    return []
+    return ['{3} x_{0}{1}{2} - {4} u_{0}{1}{2} = 0'.format(i, j, k, PATH_SPLIT, DEMAND_FLOW(i, j)) for (i, j, k) in perms([s, t, d])]
 
 
 def get_binary_constraints(s, t, d):
