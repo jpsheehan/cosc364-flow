@@ -116,10 +116,12 @@
 
 \maketitle
 
+\vfill
+
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\textwidth]{traffic}
-	\caption{An artist's impression of a traffic problem outside of the Jack Erskine building (J. P. Sheehan, May 2019).}
+	\caption{Traffic problems are not unique to computer networks.}
 	\label{fig:traffic}
 \end{figure}
 
@@ -131,8 +133,8 @@ Given a network (figure \ref{fig:network}) with $X$ source nodes, $Y$ transit no
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.7\textwidth]{network}
-	\caption{An example network (A. Willig, April 2019).}
+	\includegraphics[width=\textwidth]{network}
+	\caption{An example network showing nodes $S_i$, $T_k$ and $D_j$ and links $c_{ik}$ and $d_{kj}$.}
 	\label{fig:network}
 \end{figure}
 
@@ -224,9 +226,9 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 	\label{tab:results}
 \end{table}
 
-\noindent An analysis of these results confirms many assumptions that were made about the problem. The number of non-zero link capacities increases linearly (figure \ref{fig:cplex_num_nonzero_links}), the transit node load spread is very close to (if not exactly) zero for most networks (figure \ref{fig:cplex_transit_load_spread}), and the amount of time taken to solve the problem increases (almost) non-linearly as the number of transit nodes increases (figure \ref{fig:cplex_time}). \\
+\noindent An analysis of these results confirms many assumptions that were made about the problem. The number of non-zero link capacities increases linearly (figure \ref{fig:cplex_num_nonzero_links}), the transit node load spread is very close to (if not exactly) zero for most networks (figure \ref{fig:cplex_transit_load_spread}), and the amount of time taken to solve the problem increases (almost) non-linearly as the number of transit nodes increases (figure \ref{fig:cplex_time}). It is important to note that the load on the transit nodes was only able to be balanced in three of the networks. \textbf{Give a reason why.} \\
 
-\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ network and has the highest transit node load spread by a factor of 2. \textbf{Explain this behaviour!!!} \\
+\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ network and has the highest transit node load spread by a factor of 3. \textbf{Explain this behaviour!!!} \\
 
 \noindent The second odd feature of the data is the highest link capacities of the $Y=3$ and $Y=6$ networks (figure \ref{fig:cplex_highest_capacity_links}). \textbf{Also explain this behaviour!!!}
 
