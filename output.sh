@@ -7,5 +7,5 @@ do
    end=$(date +%s%N)
    duration=$(expr $end - $start)
    duration=$(expr $duration / 1000000)
-   echo "elapsed time: $duration ms" >> tests/$y.txt
+   echo -e "\nelapsed_time: $duration ms" >> tests/$y.txt
 done
