@@ -237,9 +237,10 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 
 \noindent An analysis of these results confirms many assumptions that were made about the problem. The number of non-zero link capacities increases linearly (figure \ref{fig:cplex_num_nonzero_links}), the transit node load spread is very close to (if not exactly) zero for most networks (figure \ref{fig:cplex_transit_load_spread}), and the amount of time taken to solve the problem increases (almost) non-linearly as the number of transit nodes increases (figure \ref{fig:cplex_time}). It is important to note that the load on the transit nodes was only able to be balanced in three of the networks, however the load spread on the remaining three networks is very low. CPLEX has done its best to equalise the loads on each transit node but could not balance them in some cases due to the demand flows and the number of nodes. \\
 
-\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ network and has the highest transit node load spread by a factor of 3. \textbf{Explain this behaviour!!!} \\
+\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ and $Y=6$ networks and has the highest transit node load spread by a factor of 3. \textbf{Explain this behaviour!!!} \\
 
-\noindent The second odd feature of the data is the highest link capacities of the $Y=3$ and $Y=6$ networks (figure \ref{fig:cplex_highest_capacity_links}). \textbf{Also explain this behaviour!!!}
+\noindent The second odd feature of the data is the greatest link capacities of the $Y=3$ and $Y=6$ networks (figure \ref{fig:cplex_highest_capacity_links}). The exact reason behind this behaviour is unknown but it would have something to do with these specific combinations of $X$, $Y$ and $Z$ not being relatively prime. % AKA BLACK MAGIC FUCKERY
+% MAYBE ANSWER THIS PROPERLY INSTEAD OF SPINNING A YARN
 
 \begin{figure}[H]
 	\centering
