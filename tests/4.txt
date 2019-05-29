@@ -58,7 +58,7 @@ Solution pool: 6 solutions saved.
 
 MIP - Integer optimal solution:  Objective =  3.0400000000e+02
 Solution time =    0.04 sec.  Iterations = 143  Nodes = 0
-Deterministic time = 13.53 ticks  (352.99 ticks/sec)
+Deterministic time = 13.53 ticks  (368.63 ticks/sec)
 
 CPLEX> Incumbent solution
 Variable Name           Solution Value
@@ -458,4 +458,4 @@ u_937                         1.000000
 u_938                         1.000000
 u_939                         1.000000
 All other variables in the range 1-770 are 0.
-CPLEX> elapsed time: 42 ms
+CPLEX> elapsed time: 41 ms
