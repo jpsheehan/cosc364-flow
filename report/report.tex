@@ -73,7 +73,7 @@
 	title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
 }
 
-\graphicspath{ {./images/} }
+\graphicspath{ {./images/}{../graphs/} }
 
 %%% HEADERS & FOOTERS
 \pagestyle{fancy}
@@ -223,7 +223,33 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 	\label{tab:results}
 \end{table}
 
-% ALSO DO A GRAPH?
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{cplex_data_time}
+	\caption{The time taken to execute the LP file in CPLEX for each network.}
+	\label{fig:cplex_time}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{cplex_data_num_nonzero_links}
+	\caption{The number of non-zero link capacities in each network.}
+	\label{fig:cplex_num_nonzero_links}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{cplex_data_transit_load_spread}
+	\caption{The amount of spread in the load for all transit nodes in each network.}
+	\label{fig:cplex_transit_load_spread}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{cplex_data_highest_capacity_links}
+	\caption{The highest capacity links for each network. Both the $C_{ik}$ and $D_{kj}$ links are listed.}
+	\label{fig:cplex_highest_capacity_links}
+\end{figure}
 
 % Show results for the CPLEX execution time, the number of links with non-zero capacities, the spread of the transit node loads (the difference between the largest and the smallest transit node load), and the highest capacity links, for all varying Y.
 % Show these results as a graph or a table.
