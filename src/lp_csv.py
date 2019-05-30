@@ -34,9 +34,9 @@ def openFile(Y):
         data.append(max(floatmap(parseFile("l_", lines))) -
                     min(floatmap(parseFile("l_", lines))))
         # highest cap c network
-        data.append(max(parseFile("c_", lines)))
+        data.append(max(floatmap(parseFile("c_", lines))))
         # highest cap d network
-        data.append(max(parseFile("d_", lines)))
+        data.append(max(floatmap(parseFile("d_", lines))))
         csvWrite(data)
 
 
@@ -47,8 +47,8 @@ def parseFile(string, lines):
     values = []
     for line in lines:
         if line.startswith(string):
-            values.append(line.split()[1])
-
+            values.append(line.split()[-1])
+            
     return values
 
 
@@ -66,5 +66,6 @@ if __name__ == "__main__":
     openFile(6)
     openFile(7)
     openFile(8)
+    openFile(9)
 
     print("Saved CSV data to '{}'".format(sys.argv[2]))

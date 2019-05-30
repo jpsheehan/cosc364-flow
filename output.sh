@@ -7,7 +7,7 @@ do
    end=$(date +%s%N)
    duration=$(expr $end - $start)
    duration=$(expr $duration / 1000000)
-   echo -e "\nelapsed_time: $duration ms" >> cplex_logs/$y.txt
+   echo -e "\nelapsed_time: $duration" >> cplex_logs/$y.txt
 done
 
 python3 src/lp_csv.py cplex_logs lp_files/cplex_data.csv
