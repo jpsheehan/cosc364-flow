@@ -66,6 +66,5 @@ if __name__ == "__main__":
     openFile(6)
     openFile(7)
     openFile(8)
-    openFile(9)
 
     print("Saved CSV data to '{}'".format(sys.argv[2]))
