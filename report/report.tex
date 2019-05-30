@@ -235,12 +235,13 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 	\label{tab:results}
 \end{table}
 
-\noindent An analysis of these results confirms many assumptions that were made about the problem. The number of non-zero link capacities increases linearly (figure \ref{fig:cplex_num_nonzero_links}), the transit node load spread is very close to (if not exactly) zero for most networks (figure \ref{fig:cplex_transit_load_spread}), and the amount of time taken to solve the problem increases (almost) non-linearly as the number of transit nodes increases (figure \ref{fig:cplex_time}). It is important to note that the load on the transit nodes was only able to be balanced in three of the networks, however the load spread on the remaining three networks is very low. CPLEX has done its best to equalise the loads on each transit node but could not balance them in some cases due to the demand flows and the number of nodes. \\
+\noindent An analysis of these results confirms many assumptions that were made about the problem. The number of non-zero link capacities increases linearly (figure \ref{fig:cplex_num_nonzero_links}), the transit node load spread is very close to (if not exactly) zero for most networks (figure \ref{fig:cplex_transit_load_spread}), and the amount of time taken to solve the problem increases non-linearly as the number of transit nodes increases (figure \ref{fig:cplex_time}).\\
 
-\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ and $Y=6$ networks and has the highest transit node load spread by a factor of 3. \textbf{Explain this behaviour!!!} \\
+\noindent It is important to note that the load on the transit nodes was only able to be balanced in three of the networks, however the load spread on the remaining three networks is very low. CPLEX has done its best to equalise the loads on each transit node but could not balance them in some cases due to the topologies of these networks. \\
 
-\noindent The second odd feature of the data is the greatest link capacities of the $Y=3$ and $Y=6$ networks (figure \ref{fig:cplex_highest_capacity_links}). The exact reason behind this behaviour is unknown but it would have something to do with these specific combinations of $X$, $Y$ and $Z$ not being relatively prime. % AKA BLACK MAGIC FUCKERY
-% MAYBE ANSWER THIS PROPERLY INSTEAD OF SPINNING A YARN
+\noindent The value of the greatest link capacities in each network (figure \ref{fig:cplex_highest_capacity_links}) decreases as the number of transit nodes increases. This is expected behaviour as there are more links to spread the load. \\
+
+\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ and $Y=6$ networks and has the highest transit node load spread by a factor of 3. \textbf{Explain this behaviour!!!}
 
 \begin{figure}[H]
 	\centering
@@ -270,12 +271,7 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 	\label{fig:cplex_highest_capacity_links}
 \end{figure}
 
-% Show results for the CPLEX execution time, the number of links with non-zero capacities, the spread of the transit node loads (the difference between the largest and the smallest transit node load), and the highest capacity links, for all varying Y.
-% Show these results as a graph or a table.
-% Please explain the results
-
 \section{Appendix}
-
 
 \subsection{Source Code}
 \label{section:source}
