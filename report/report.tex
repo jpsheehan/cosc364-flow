@@ -241,8 +241,7 @@ LP files were generated with parameters $X = Z = 9, Y \in \{3, 4, 5, 6, 7, 8\}$.
 
 \noindent The value of the greatest link capacities in each network (figure \ref{fig:cplex_highest_capacity_links}) decreases as the number of transit nodes increases. This is expected behaviour as there are more links to spread the load. \\
 
-\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ and $Y=6$ networks and has the highest transit node load spread by a factor of 3. Inspecting the CPLEX log files revealed that CPLEX was able to find an incumbent solution for the $Y=7$ network in 139 iterations, compared to the 9352 iterations required for the $Y=6$ solution. This is consistent with the time taken to solve the system. We have arrived at the conclusion that there is something special about this network and CPLEX has a way to solve it very efficiently.
-
+\noindent The most obvious feature of the results is the data for the $Y=7$ network. It appears to be an outlier as it takes less time to solve than the $Y=5$ and $Y=6$ networks and has the highest transit node load spread by a factor of 3. Inspecting the CPLEX log files revealed that CPLEX was able to find an incumbent solution for the $Y=7$ network in 139 iterations, compared to the 9352 iterations required for the $Y=6$ solution. This is consistent with the time taken to solve the system. Further analysis of the log file showed this was due to CPLEX solving the $Y=7$ network in the root node, preventing the computationally expensive branch and cut optimization from executing. 
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.8\textwidth]{cplex_data_time}
